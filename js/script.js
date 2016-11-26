@@ -61,6 +61,50 @@ $(function () {
 
         return false;
     }
+    
+    function getData () {
+        
+        var data         = {};
+            data.name    = $('#inputName').val();
+            data.surname = $('#inputSurname').val();
+            data.lasname = $('#inputLastName').val();
+            data.email   = $('#inputEmail').val();
+
+        $.ajax({
+            
+            type: 'GET',
+            url: 'http://92.53.104.115:3000/api/v1/users',
+            data: data,
+            
+            dataType: 'html', //script, html, json, jsonp
+            
+            beforeSend: function ( jqXHR, settings ) {
+                console.log('сейчас что-то будет!');
+            },
+            
+            error: function ( jqXHR, textStatus, errorThrown ) {
+                console.log('ошибка');
+            },
+            
+            success: function ( data, textStatus, errorThrown ){
+                
+//                $('#container').html(data[0].name);
+//                $('#container').show();
+                
+                console.log('а вот и данные:');
+                console.log(data);
+                
+            },
+            
+            complete: function ( jqXHR, textStatus ) {
+                console.log('все готово');
+            }
+        });
+
+        return false;
+    }
+    
+    $('#getUser').click( getData );
 
 });
 
