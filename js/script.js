@@ -76,7 +76,7 @@ $(function () {
             url: 'http://92.53.104.115:3000/api/v1/users',
             data: data,
             
-            dataType: 'html', //script, html, json, jsonp
+            dataType: 'json', //script, html, json, jsonp
             
             beforeSend: function ( jqXHR, settings ) {
                 console.log('сейчас что-то будет!');
@@ -88,7 +88,14 @@ $(function () {
             
             success: function ( data, textStatus, errorThrown ){
                 
-//                $('#container').html(data[0].name);
+                var list = $('#list');
+                
+                data.forEach( function (user) {
+                    
+                    list.append('<li class="list-group-item">' + user.name + '</li>')
+                    
+                });
+                
 //                $('#container').show();
                 
                 console.log('а вот и данные:');
